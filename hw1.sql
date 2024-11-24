@@ -16,7 +16,7 @@ VALUES
     ('Physics', TRUE, 0, 100),
     ('Machine learning', FALSE, 0, 50);
 
-SELECT * FROM courses;
+SELECT * FROM courses LIMIT 10;
 
 -- таблица groups
 CREATE TABLE groups (
@@ -69,36 +69,43 @@ VALUES
 -- все курсы, по которым есть экзамен
 SELECT *
 FROM courses
-WHERE is_exam = TRUE;
+WHERE is_exam = TRUE
+LIMIT 10;
 
 -- общее количество курсов
 SELECT COUNT(*) AS total_courses
-FROM courses;
+FROM courses
+LIMIT 10;
 
 -- группы где больше одного студента
 SELECT *
 FROM groups
-WHERE ARRAY_LENGTH(students_ids, 1) > 1;
+WHERE ARRAY_LENGTH(students_ids, 1) > 1
+LIMIT 10;
 
 -- общее кол-во групп
 SELECT COUNT(*) AS total_groups
-FROM groups;
+FROM groups
+LIMIT 10;
 
 -- все оценки выше 80
 SELECT *
 FROM grades
-WHERE grade > 80;
+WHERE grade > 80
+LIMIT 10;
 
 -- средняя оценка по всем курсам
 SELECT AVG(grade) AS average_grade
-FROM grades;
+FROM grades
+LIMIT 10;
 
 -- вывод студента с максимальной оценкой
 SELECT s.first_name, s.last_name, g.grade, c.name AS course_name
 FROM grades g
 JOIN students s ON g.student_id = s.id
 JOIN courses c ON g.course_id = c.id
-WHERE g.grade = (SELECT MAX(grade) FROM grades);
+WHERE g.grade = (SELECT MAX(grade) FROM grades)
+LIMIT 1;
 
 
 
